@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Details</title>
+  <script>
+    function displayEmployeeDetails() {
+      const email = decodeURIComponent(getQueryParam('email'));
+      const employeeData = sessionStorage.getItem('employeeData');
+
+      if (email && employeeData) {
+        const staffObj = JSON.parse(employeeData);
+
+        // Display the employee details on the page
+        document.getElementById('email').textContent = email;
+        document.getElementById('firstName').textContent = staffObj.firstName;
+        document.getElementById('lastName').textContent = staffObj.lastName;
+        document.getElementById('employeeNumber').textContent = staffObj.employeeNumber;
+        document.getElementById('extension').textContent = staffObj.extension;
+        document.getElementById('officeCode').textContent = staffObj.officeCode;
+        document.getElementById('reportsTo').textContent = staffObj.reportsTo;
+        document.getElementById('jobTitle').textContent = staffObj.jobTitle;
+      }
+    }
+
+    // Utility function to get the value of a query parameter from the URL
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Call displayEmployeeDetails when the page loads
+    window.onload = displayEmployeeDetails;
+  </script>
+</head>
+<body>
+  <h1>Employee Details</h1>
+  <h2>Email: <span id="email"></span></h2>
+  <p>First Name: <span id="firstName"></span></p>
+  <p>Last Name: <span id="lastName"></span></p>
+  <p>Employee Number: <span id="employeeNumber"></span></p>
+  <p>Extension: <span id="extension"></span></p>
+  <p>Office Code: <span id="officeCode"></span></p>
+  <p>Reports To: <span id="reportsTo"></span></p>
+  <p>Job Title: <span id="jobTitle"></span></p>
+</body>
+</html>
